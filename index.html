@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CPUmeter</title>
+    <link rel="icon" href="img/favicon.png">
+    <meta name="theme-color" content="#373737">
+    <meta name="Description" content="CPUmeter">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="normalize.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Electrolize">
+    <script src="https://use.fontawesome.com/8acbbc8797.js"></script>
+</head>
+<body>
+    
+<!--<button id="tester" class="set-button">Test</button>-->
+
+<p id="wip">(Work In Progress)</p>
+  
+<div id="app">
+    
+    
+    <section id="section-topbar">
+        <div id="topheader">
+            <div id="top-pic">
+                <img src="img/logo.png" alt="CPUmeter">
+            </div>
+            <div id="topheading">
+                <h1>CPU<span>METER</span></h1>
+                <h2>Smart Hardware Monitoring</h2>
+            </div>
+        </div>
+        <div id="date">
+            <p id="pvm"></p>
+        </div>
+    </section> <!-- TopBar -->
+    
+
+    
+    
+    <div class="hide">
+    
+        
+    <!-- FREQUENCY -->
+    <section class="section-main" id="section-frequency">
+        <div class="section-main-header">
+            <h3>Frequency & voltage</h3>
+            <div class="options-wrapper">
+                <button class="options-btn">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="options-content">
+                    <a href="#" id="expand-freq"><i class="fa fa-expand" aria-hidden="true"></i> Expand</a>
+                    <a href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Clear history</a>
+                    <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Properties</a>
+                </div>
+            </div>
+        </div>
+      
+        <div class="section-main-content frequency-content">
+            <a href="#" class="content-block frequency-content-block" title="CPU Frequency">
+                <div class="blocktitle">CPU Frequency</div>
+                <div class="blockvalue">3800.0 <span>MHz</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div> 
+            </a>
+        
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">DRAM Frequency</div>
+                <div class="blockvalue">2140.0 <span>MHz</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+          
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">CPU core voltage</div>
+                <div class="blockvalue">1.200 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div>
+            </a>
+          
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+12V</div>
+                <div class="blockvalue">12.100 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+          
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+5V</div>
+                <div class="blockvalue">5.000 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div>
+            </a>
+        
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+3.3V</div>
+                <div class="blockvalue">3.328 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+        
+        </div>  <!-- Freq-Cubecontent -->
+    </section>    <!-- Freq-CUBE -->
+    
+    
+    
+    <div class="section-splitter">
+        <div id="left-side">
+
+            <!-- FANS --> 
+            <section class="section-main" id="section-fan">
+                <div class="section-main-header">
+                    <h3>Fan</h3>
+                    <div class="options-wrapper">
+                        <button class="options-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                        <div class="options-content">
+                            <a href="#">Expand</a>
+                            <a href="#">Properties</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-main-content fan-content">
+                    <a href="#" class="content-block fan-content-block">
+                        <div class="fan-image"></div>
+                        <div class="blocktitle">CPU fan</div>
+                        <div class="blockvalue">2200 <span>rpm</span></div>
+                    </a>
+                    <a href="#" class="content-block fan-content-block">
+                        <div class="fan-image"></div>
+                        <div class="blocktitle">CHA fan 1</div>
+                        <div class="blockvalue">950 <span>rpm</span></div>
+                    </a>
+                    <a href="#" class="content-block fan-content-block">
+                        <div class="fan-image"></div>
+                        <div class="blocktitle">CHA fan 2</div>
+                        <div class="blockvalue">600 <span>rpm</span></div>
+                    </a>
+                </div>  <!-- fan-content -->
+
+            </section>
+
+
+
+            <!-- USAGE -->
+            <section class="section-main use-cube" id="section-usage">
+                <div class="section-main-header">
+                    <h3>CPU Usage</h3>
+                    <div class="options-wrapper">
+                        <button class="options-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                        <div class="options-content">
+                            <a href="#">Expand</a>
+                            <a href="#">Properties</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-main-content usage-content">
+                    <div class="usage-overall">
+                        <a href="#" class="content-block usage-overall-content-block">
+                            <div class="blocktitle">Current usage</div>
+                            <div class="blockvalue">67.5 <span>%</span></div>
+                        </a>
+                        <a href="#" class="content-block usage-overall-content-block">
+                            <div class="blocktitle">Average <span>(1h)</span></div>
+                            <div class="blockvalue">47.8 <span>%</span></div>
+                        </a>
+                    </div>  <!-- Use-overall -->
+
+
+                    <div class="usage-cores">
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 1</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>100&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 2</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>90&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 3</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>65&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 4</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>53&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 5</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>23&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="content-block usage-cores-content-block">
+                            <div class="blocktitle">CORE 6</div>
+                            <div class="cores-circle">
+                                <div class="cores-circle-inner">
+                                    <p>8&#37;</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>  <!-- Usage-cores -->
+
+                </div>      <!-- usage-content -->
+            </section>      <!-- Section-usage -->
+
+        </div> <!-- LEFT-SIDE -->
+      
+    
+        <div id="right-side">
+        
+            <!-- TEMPERATURE -->
+            <section class="section-main" id="section-temperature">
+                <div class="section-main-header">
+                    <h3>Temperature</h3>
+                </div>
+
+                <div class="section-main-content temperature-content scrollbar scroll-temp">
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">CPU</div>
+                        <div class="blockvalue temperature-value">35,2 <span>&deg;C</span></div>
+                        <div class="temperature-image1"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">Motherboard</div>
+                        <div class="blockvalue temperature-value">31,8 <span>&deg;C</span></div>
+                        <div class="temperature-image2"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">PCH</div>
+                        <div class="blockvalue temperature-value">45,1 <span>&deg;C</span></div>
+                        <div class="temperature-image1"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">VRM</div>
+                        <div class="blockvalue temperature-value">44,6 <span>&deg;C</span></div>
+                        <div class="temperature-image2"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">T_Sensor</div>
+                        <div class="blockvalue temperature-value">24,7 <span>&deg;C</span></div>
+                        <div class="temperature-image1"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">EXT_Sensor1</div>
+                        <div class="blockvalue temperature-value">29,9 <span>&deg;C</span></div>
+                        <div class="temperature-image2"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">EXT_Sensor2</div>
+                        <div class="blockvalue temperature-value">33,1 <span>&deg;C</span></div>
+                        <div class="temperature-image1"></div>
+                    </a>
+
+                    <a href="javascript:void(0)" class="content-block temperature-content-block">
+                        <div class="blocktitle temperature-blocktitle">EXT_Sensor3</div>
+                        <div class="blockvalue temperature-value">40,0 <span>&deg;C</span></div>
+                        <div class="temperature-image2"></div>
+                    </a>
+
+                </div>      <!-- temperature-content -->
+            </section>      <!-- section-temperature -->
+ 
+        </div><!-- right-side -->
+    </div><!-- sectionsplitter -->
+        
+</div>      <!-- HIDE -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- EXPANDED SECTIONS -->
+    
+    <section class="section-main section-expanded" id="section-expanded-frequency">
+
+        <div class="section-main-header">
+            <button id="backToMain1" class="btn-back" title="Back to Main Menu">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;BACK&nbsp;
+            </button>
+            <h3>Frequency & Voltage</h3>
+        </div>
+
+        <div class="section-main-content frequency-content scrollbar scroll-freq">
+
+            <a href="#" class="content-block frequency-content-block" title="CPU Frequency">
+                <div class="blocktitle">CPU Frequency</div>
+                <div class="blockvalue">3800.0 <span>MHz</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div>
+            </a>
+
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">DRAM Frequency</div>
+                <div class="blockvalue">2140.0 <span>MHz</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">CPU core voltage</div>
+                <div class="blockvalue">1.200 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div>
+            </a>
+
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+12V</div>
+                <div class="blockvalue">12.100 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+5V</div>
+                <div class="blockvalue">5.000 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart1"></div>
+            </a>
+
+            <a href="#" class="content-block frequency-content-block">
+                <div class="blocktitle">+3.3V</div>
+                <div class="blockvalue">3.328 <span>V</span></div>
+                <div class="freq-blockchart freq-blockchart2"></div>
+            </a>
+
+        </div>      <!-- frequency-content -->
+    </section>      <!-- section-expanded-frequency -->
+    
+    
+    
+    
+    
+    
+    
+    <!-- FULL SINGLE SECTIONS -->
+    
+    <section class="section-main section-single" id="section-single-frequency">
+        <div class="section-main-header">
+            <button id="backToMain2" class="btn-back" title="Back to Main Menu">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;BACK&nbsp;
+            </button>
+            <h3>CPU Frequency</h3>
+        </div>
+      
+        <div class="section-main-content frequency-content">
+            
+            <div class="frequency-single-subheader">
+                <h4>Intel(R) Core(TM) i5-6600K CPU @ 3.80GHz</h4>
+            </div>
+            
+            <div class="frequency-single-content">
+                <div class="frequency-single-cores">
+                    <label class="core-select">
+                        <p class="select-title">ALL</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 1</p>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 2</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 3</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 4</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 5</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="core-select">
+                        <p class="select-title">Core 6</p>
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                    
+                
+                <div class="frequency-single-histogram">
+            
+                    <div class="freq-blockchart">
+                        <!--<div class="freq-blockchart-left">
+                            <div class="left-num1"100</div>
+                            <div class="left-num2"50</div>
+                            <div class="left-num3"0</div>
+                        </div> -->
+                        <!--<img src="https://www.dropbox.com/s/2qntrsd0hbhso6b/Chart-3-Big.svg?raw=1" alt="chart"> -->
+                        <!--<img src="https://www.dropbox.com/s/7oqn34jmte5porg/Chart-3-Big2.svg?raw=1" alt="chart"> -->
+                        <div class="freq-single-core-chart active"  id="freq-single-core-chart-core1"></div>
+                        <div class="freq-single-core-chart"         id="freq-single-core-chart-core2"></div>
+                        <div class="freq-single-core-chart"         id="freq-single-core-chart-core3"></div>
+                        <div class="freq-single-core-chart"         id="freq-single-core-chart-core4"></div>
+                        <div class="freq-single-core-chart"         id="freq-single-core-chart-core5"></div>
+                        <div class="freq-single-core-chart"         id="freq-single-core-chart-core6"></div>
+                    </div>
+                
+                    <div class="frequency-single-info">
+                        <div class="full-txtBlock">
+                            <div class="blockvalue">3800.0 <span>MHz</span></div>
+                            <div class="blocktitle">CPU Frequency</div>
+                        </div>
+                        <div class="full-txtBlock">
+                            <div class="blockvalue">100.0 x 38</div>
+                            <div class="blocktitle">CPU Ratio</div>
+                        </div>
+                        <div class="full-txtBlock">
+                            <div class="blockvalue">26.0 <span>watts</span></div>
+                            <div class="blocktitle">Power consumption</div>
+                        </div>
+                    </div>
+                    
+                </div> <!-- frequency-single-histogram -->
+            </div><!-- frequency-single-content -->
+          
+        </div>  <!-- Freq-Cubecontent -->
+    </section>    <!-- section-single-frequency -->
+    
+    
+    
+    
+    <div class="show3x1fan">    <!-- 3X1 FAN -->
+      
+        <section class="section-main section-full-fan">
+            <div class="section-main-header">
+                <button id="backToMain3" class="btn-back" title="Back to Main Menu">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;BACK&nbsp;
+                </button>
+                <h3>Fan</h3>
+                <!--<i class="fa fa-spinner" aria-hidden="true"></i>-->
+            </div>
+                
+            <div class="section-main-content full-fan-content-wrapper">
+
+                <div class="full-fan-content-cube">
+                    <div class="full-blocktitle">CPU FAN</div>
+                    <div class="full-fan-circle circleimg1">
+                        <div class="full-percentagevalue">82 &#37;</div>
+                        <div class="full-rpmvalue">2200 <span>rpm</span></div>
+                    </div>
+                    
+                    <div class="full-fan-history">
+                        <select name="cpufan-history1">
+                        <option value="value1">5 SECONDS</option> 
+                        <option value="value2" selected>30 SECONDS</option>
+                        <option value="value3">1 MINUTE</option>
+                        <option value="value3">5 MINUTES</option>
+                        <option value="value3">30 MINUTES</option>
+                        </select>
+                        <div class="full-fan-history-chart"></div>
+                    </div>
+                    
+                    <div class="full-fan-history-additional-info">
+                        <div class="additional-info-block">
+                        Record high<span>2500 rpm</span>
+                        </div>
+                        <div class="additional-info-block">
+                        Record low<span>1800 rpm</span>
+                        </div>
+                        <br>
+                        <div class="additional-info-block">
+                        Wattage<span>6 w</span>
+                        </div>
+                    </div>
+                
+                </div>  <!-- cubecontent -->
+                    
+                    
+                <div class="full-fan-content-cube">
+                    <div class="full-blocktitle">CHA FAN 1</div>
+                    <div class="full-fan-circle circleimg2">
+                        <div class="full-percentagevalue">65 &#37;</div>
+                        <div class="full-rpmvalue">950 <span>rpm</span></div>
+                    </div>
+                    
+                    <div class="full-fan-history">
+                        <select name="cpufan-history2">
+                        <option value="value1" selected>5 SECONDS</option> 
+                        <option value="value2">30 SECONDS</option>
+                        <option value="value3">1 MINUTE</option>
+                        <option value="value3">5 MINUTES</option>
+                        <option value="value3">30 MINUTES</option>
+                        </select>
+                        <div class="full-fan-history-chart"></div>
+                    </div>
+                    
+                    <div class="full-fan-history-additional-info">
+                        <div class="additional-info-block">
+                        Record high<span>1200 rpm</span>
+                        </div>
+                        <div class="additional-info-block">
+                        Record low<span>900 rpm</span>
+                        </div>
+                        <br>
+                        <div class="additional-info-block">
+                        Wattage<span>3 w</span>
+                        </div>
+                    </div>
+                </div>  <!-- cubecontent -->
+                
+                
+                <div class="full-fan-content-cube">
+                    <div class="full-blocktitle">CHA FAN 2</div>
+                    <div class="full-fan-circle circleimg3">
+                        <div class="full-percentagevalue">48 &#37;</div>
+                        <div class="full-rpmvalue">600 <span>rpm</span></div>
+                    </div>
+                    
+                    <div class="full-fan-history">
+                        <select name="cpufan-history3">
+                        <option value="value1">5 SECONDS</option> 
+                        <option value="value2">30 SECONDS</option>
+                        <option value="value3" selected>1 MINUTE</option>
+                        <option value="value3">5 MINUTES</option>
+                        <option value="value3">30 MINUTES</option>
+                        </select>
+                        <div class="full-fan-history-chart"></div>
+                    </div>
+                        
+                    <div class="full-fan-history-additional-info">
+                        <div class="additional-info-block">
+                        Record high<span>700 rpm</span>
+                        </div>
+                        <div class="additional-info-block">
+                        Record low<span>550 rpm</span>
+                        </div>
+                        <br>
+                        <div class="additional-info-block">
+                        Wattage<span>2 w</span>
+                        </div>
+                    </div>
+                </div>  <!-- cubecontent -->
+                    
+            
+            </div>  <!-- Fan-Cubecontent -->
+
+        </section>    <!-- FULL-FAN -->
+    </div>    <!-- SHOW 3X1 FAN -->
+      
+      
+    
+    
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    
+    
+        <section id="section-footer">
+            <div class="footer-left">
+                Real time feed
+                <label class="switch" title="Turn on real time feed statistics (not working)">
+                <input type="checkbox">
+                    <span class="feed-slider"></span>
+                </label>
+            </div>
+
+
+            <div class="footer-right">
+                <button id="btn-help" class="footer-button" title="Help">
+                    Help
+                </button>
+                <button id="btn-settings" class="footer-button" title="Settings">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </button>
+                <button id="btn-info" class="footer-button" title="Info">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                </button>
+            </div>
+        </section>  <!-- Section footer -->
+        
+         
+        
+        
+        
+        
+        <!-- Help Modal -->
+        <div id="modal-help" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5><i class="fa fa-question-circle-o" aria-hidden="true"></i>Help modal window</h5>
+                </div>
+                <div class="modal-body scrollbar scroll-help">
+                    <h5>The first header</h5>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis convallis, massa vel gravida auctor, diam enim convallis augue, non feugiat massa nisi ornare dui. Nulla facilisi. Donec laoreet, purus non mollis aliquam, sem sapien semper nibh, tempus viverra mi augue vel est. Nam tincidunt massa eget ex feugiat mattis. Pellentesque in dolor eu sapien pretium dictum. Nulla eu euismod ante. Morbi ac aliquet massa. Aenean imperdiet lacus ac sem volutpat finibus. Sed luctus vitae lacus efficitur convallis. Sed pharetra quis erat eget commodo. Proin finibus massa vel metus tincidunt lacinia.</p>
+                    <br>
+                    <h5>Second header</h5>
+                    <hr>
+                    <p>Aenean sed lacinia erat. Duis at nisi molestie, tempus arcu ut, sollicitudin lorem. Maecenas imperdiet turpis tempus lacus tincidunt consequat. Donec vel ante quam. Donec eleifend ligula felis, et finibus dolor commodo nec. Nullam a fringilla justo. Curabitur non libero placerat, tempus ante sed, scelerisque nulla.</p>
+                    <p>Ut molestie purus sem, eget vestibulum ex accumsan at. Duis auctor auctor sodales. Morbi lacinia porta nulla vitae pellentesque. Etiam vestibulum arcu vel feugiat malesuada. Cras in nibh id odio dignissim porttitor ut id magna. Nulla facilisi. Cras nec quam tempus, euismod purus at, lacinia odio. Donec pulvinar, enim at bibendum mattis, eros turpis interdum mauris, vitae pretium diam justo at orci. Sed viverra in ante dignissim bibendum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis convallis, massa vel gravida auctor, diam enim convallis augue, non feugiat massa nisi ornare dui. Nulla facilisi. Donec laoreet, purus non mollis aliquam, sem sapien semper nibh, tempus viverra mi augue vel est. Nam tincidunt massa eget ex feugiat mattis. Pellentesque in dolor eu sapien pretium dictum. Nulla eu euismod ante. Morbi ac aliquet massa. Aenean imperdiet lacus ac sem volutpat finibus. Sed luctus vitae lacus efficitur convallis. Sed pharetra quis erat eget commodo. Proin finibus massa vel metus tincidunt lacinia.</p>
+                    <br>
+                    <h5>Third header</h5>
+                    <hr>
+                    <p>Aenean sed lacinia erat. Duis at nisi molestie, tempus arcu ut, sollicitudin lorem. Maecenas imperdiet turpis tempus lacus tincidunt consequat. Donec vel ante quam. Donec eleifend ligula felis, et finibus dolor commodo nec. Nullam a fringilla justo. Curabitur non libero placerat, tempus ante sed, scelerisque nulla.</p>
+                    <p>Ut molestie purus sem, eget vestibulum ex accumsan at. Duis auctor auctor sodales. Morbi lacinia porta nulla vitae pellentesque. Etiam vestibulum arcu vel feugiat malesuada. Cras in nibh id odio dignissim porttitor ut id magna. Nulla facilisi. Cras nec quam tempus, euismod purus at, lacinia odio. Donec pulvinar, enim at bibendum mattis, eros turpis interdum mauris, vitae pretium diam justo at orci. Sed viverra in ante dignissim bibendum.</p>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                    <button id="close1" class="set-button close" title="Close modal window"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+                </div>
+
+            </div> <!-- modal-content -->
+        </div> <!-- modal-help -->
+        
+        
+        
+        
+        
+        <!-- Info Modal -->
+        <div id="modal-info" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-tabs">
+                        <button class="tablinks" onclick="openTab(event, 'Info')" id="defaultOpen">Info</button>
+                        <button class="tablinks" onclick="openTab(event, 'System')">System</button>
+                        <button class="tablinks" onclick="openTab(event, 'About')">About</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="Info" class="tabcontent">
+                        <h5><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Info</h5>
+                        <hr>
+                        <p>CPUmeter v0.7&nbsp;&nbsp;(Work in progress.)</p>
+                        <p>This is not a real CPU monitoring application. Just a personal practice project experimenting with UI design & development.</p>
+                        <p>Tools, libraries and resources used for this project:</p>
+            
+                        <ul>
+                            <li>HTML5</li>
+                            <li>SCSS</li>
+                            <li>Javascript</li>
+                            <li>Bootstrap</li>
+                            <li>jQuery</li>
+                            <li>Google Fonts</li>
+                            <li>Font Awesome</li>
+                        </ul>
+                    </div>
+          
+                    <div id="System" class="tabcontent">
+                        <h5><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;System Information</h5>
+                        <hr>
+                        <table>
+                            <tr>
+                                <td>Motherboard</td>
+                                <td>Asus Z170 Pro Gaming</td>
+                            </tr>
+                            <tr>
+                                <td>BIOS version</td>
+                                <td>1102</td>
+                            </tr>
+                            <tr>
+                                <td>Processor</td>
+                                <td>Intel Core i5-6600K CPU @ 3.80GHz</td>
+                            </tr>
+                            <tr>
+                                <td>Memory</td>
+                                <td>16,0GB RAM, DDR4</td>
+                            </tr>
+                            <tr>
+                                <td>Graphics card&nbsp;&nbsp;</td>
+                                <td>Nvidia GeForce 1070</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="About" class="tabcontent">
+                        <h5><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;&nbsp;About</h5>
+                        <hr>
+                    </div>
+          
+                </div>  <!-- Modal Body -->
+        
+                <div class="modal-footer">
+                    <button id="close2" class="close" title="Close info window">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>Close
+                    </button>
+                </div>
+        
+            </div> <!-- modal-content -->
+        </div> <!-- modal-info -->    
+        
+        
+        
+    </div>  <!-- Main -->
+
+
+    <section id="section-copyright">
+        Copyright &copy; <span id="copy-year"></span> by <a href="https://codepen.io/Allu91/pen/KXQPpy">Allu</a>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
