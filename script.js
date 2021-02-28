@@ -94,34 +94,76 @@ document.getElementById("defaultOpen").click();
 
 
 
-$(document).ready(function() {
-    $("#expand-freq").click(function() {
-        $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-        $("#section-expanded-frequency").show(150).animate({ "left": "+=0px" }, "150" );
-    });
-    $("#backToMain1").click(function() {
-        $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-        $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-    });
-    $(".frequency-content-block").click(function() {
-        $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-        $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-        $("#section-single-frequency").show(150).animate({ "left": "+=0px" }, "150" );
-    });
-    $("#backToMain2").click(function() {
-        $("#section-single-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-        $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-    });
+const contentBlocks = document.querySelectorAll(".content-block");
 
-    $(".fan-content-block").click(function() {
-        $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-        $(".show3x1fan").show(150).animate({ "left": "+=0px" }, "150" );
-    });
-    $("#backToMain3").click(function() {
-        $(".show3x1fan").hide(150).animate({ "left": "+=0px" }, "150" );
-        $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-    });
-});
+contentBlocks.forEach( (element, index) => {
+
+    element.addEventListener("click", (e) => {
+        //console.log(element);
+
+        if (element.classList.contains("frequency-content-block")) {
+            console.log("FREQUENCY BLOCK");
+            $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
+            $("#section-expanded-frequency").show(150).animate({ "left": "+=0px" }, "150" );
+        } else if (element.classList.contains("fan-content-block")) {
+            console.log("FAN BLOCK")
+        } else if (element.classList.contains("usage-overall-content-block")) {
+            console.log("USAGE OVERALL BLOCK")
+        } else if (element.classList.contains("usage-cores-content-block")) {
+            console.log("USAGE CORES BLOCK")
+        } else if (element.classList.contains("temperature-content-block")) {
+            console.log("TEMPERATURE BLOCK")
+        }
+
+        // switch (element.classList.contains) {
+        //     case ("frequency-content-block"):
+        //         console.log("FREQUENCY BLOCK");
+        //         break;
+        //     case 1:
+        //         day = "Monday";
+        //         break;
+        //     case 2:
+        //         day = "Tuesday";
+        //         break;
+        //     case 3:
+        //         day = "Wednesday";
+        //         break;
+        //     case 6:
+        //         day = "Saturday";
+        // }
+    })
+})
+
+
+
+// $(document).ready(function() {
+//     $("#expand-freq").click(function() {
+//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $("#section-expanded-frequency").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+//     $("#backToMain1").click(function() {
+//         $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+//     $(".frequency-content-block").click(function() {
+//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $("#section-single-frequency").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+//     $("#backToMain2").click(function() {
+//         $("#section-single-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+
+//     $(".fan-content-block").click(function() {
+//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $(".show3x1fan").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+//     $("#backToMain3").click(function() {
+//         $(".show3x1fan").hide(150).animate({ "left": "+=0px" }, "150" );
+//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
+//     });
+// });
 
 
 

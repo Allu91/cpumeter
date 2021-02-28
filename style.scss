@@ -552,12 +552,12 @@ a {
             width: 70%;
             height: 100%;
             margin: 0 -4px 0 0;
-            padding: 5px 0 0 0;
+            padding: 5px 0 10px 0;
             font-size: 0.9em;
             display: inline-grid;
             vertical-align: top;
             column-gap: 5%;
-            row-gap: 15px;
+            row-gap: 10px;
             grid-template-columns: repeat(3, 1fr);
 
             .usage-cores-content-block {
@@ -622,7 +622,7 @@ a {
             .usage-cores {
                 width: 100%;
                 height: 100%;
-                padding: 15px 0 0 0;
+                padding: 10px 0 10px 0;
             }
         }
     }
@@ -645,14 +645,14 @@ a {
 
 
 #section-temperature {
-    height: 380px;
+    height: 386px;
     margin: 0 0 0 0;
     //display: inline-block;
     //vertical-align: top;
     
     .temperature-content {
         display: grid;
-        height: 350px;
+        height: 340px;
         row-gap: 25px;
         column-gap: 20px;
         padding: 10px 15px 10px 15px;
@@ -702,11 +702,10 @@ a {
 
 
     @media (max-width: 1024px) {
-        height: 452px;
+        height: 473px;
 
         .temperature-content {
-            height: 410px;
-            //grid-template-columns: 50%;
+            height: 425px;
             
             .temperature-content-block {
                 .temperature-image1,
@@ -714,6 +713,14 @@ a {
                     background-position: top;
                 }
             }
+        }
+    }
+
+    @media (max-width: 768px) {
+        height: 340px;
+
+        .temperature-content {
+            height: 295px;
         }
     }
 
