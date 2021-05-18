@@ -1,14 +1,16 @@
 
-/* Date */
-theTimer();
-setInterval(theTimer, 1000);
+"use strict";
 
-function theTimer() {
+// Get the date
+/*function theTimer() {
     var theTime = new Date(new Date().getTime()).toLocaleTimeString();
     var theDate = new Date(new Date().getTime()).toLocaleDateString();
-    pvm.innerHTML = theTime + " &#124; " + theDate;
-}
+    pvm.innerHTML = theTime + " &bull; " + theDate;
+}*/
 
+// Update the date every second
+/*theTimer();
+setInterval(theTimer, 1000);*/
 
 
 
@@ -48,22 +50,9 @@ window.onclick = function(event) {
 
 
 
-// Tab switching - WIP
-
-/*var tabLinks = document.querySelectorAll('.tablinks');
-for (var i = 0; i < tabLinks.length; i++) {
-    tabLinks[i].addEventListener('click', function(event) {
-        if (event.target == 0) {
-            console.log('tab 1 clicked')
-        } else {
-            console.log('not tab 1 clicked')
-        }
-    })
-}*/
 
 
-
-/* Info tabs */
+/* Modal Info tabs */
 function openTab(evt, tabName) {
   
     // Declare all variables
@@ -93,89 +82,111 @@ document.getElementById("defaultOpen").click();
 
 
 
+// Declare DOM element variables
+const 
+    contentBlocks = document.querySelectorAll(".content-block"),
+    mainView = document.querySelector("#main-view"),
+    mainSections = document.querySelectorAll(".section-main"),
+    singleSections = document.querySelectorAll(".section-single"),
+    expndedSections = document.querySelectorAll(".section-expanded"),
+    singleSecFrequency = document.querySelector("#section-single-frequency"),
+    singleSecFans = document.querySelector("#section-full-fan"),
+    singleSecCpuUsage = document.querySelector("#section-single-cpu-usage"),
+    singleSecCoreUsage = document.querySelector("#section-single-core-usage"),
+    singleSecTemp = document.querySelector("#section-single-temperature"),
+    expandBtns = document.querySelectorAll(".expand-section-btn"),
+    expandedSections = document.querySelectorAll(".section-expanded"),
+    expandedSecFreq = document.querySelector("#section-expanded-frequency");
 
-const contentBlocks = document.querySelectorAll(".content-block");
 
-contentBlocks.forEach( (element, index) => {
+// Hide single & expaded sections by default
+singleSections.forEach( (section) => section.classList.add("view-hidden"));
+expndedSections.forEach( (section) => section.classList.add("view-hidden"));
+
+
+// Hide a section with css class (display: none)
+const hideSection = (section) => {
+    section.classList.add("view-hidden")
+};
+
+// Reveal a section with animation either from left or right (right = default)
+const revealSection = (section, revealFrom = "right") => {
+    section.classList.remove("view-hidden");
+    
+    if (revealFrom == "left") {
+        section.classList.add("view-reveal-anim-from-left")
+        setTimeout( () => section.classList.remove("view-reveal-anim-from-left"), 300);
+    } else {
+        section.classList.add("view-reveal-anim-from-right")
+        setTimeout( () => section.classList.remove("view-reveal-anim-from-right"), 300);
+    }
+};
+
+
+// Click events for all content blocks
+contentBlocks.forEach( (element) => {
 
     element.addEventListener("click", (e) => {
-        //console.log(element);
 
         if (element.classList.contains("frequency-content-block")) {
-            console.log("FREQUENCY BLOCK");
-            $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-            $("#section-expanded-frequency").show(150).animate({ "left": "+=0px" }, "150" );
-        } else if (element.classList.contains("fan-content-block")) {
-            console.log("FAN BLOCK")
-        } else if (element.classList.contains("usage-overall-content-block")) {
-            console.log("USAGE OVERALL BLOCK")
-        } else if (element.classList.contains("usage-cores-content-block")) {
-            console.log("USAGE CORES BLOCK")
-        } else if (element.classList.contains("temperature-content-block")) {
-            console.log("TEMPERATURE BLOCK")
+            mainSections.forEach( (section) => hideSection(section) );
+            expandedSections.forEach( (section) => hideSection(section));
+            revealSection(singleSecFrequency, "right");
+        } 
+        else if (element.classList.contains("fan-content-block")) {
+            mainSections.forEach( (section) => hideSection(section) );
+            revealSection(singleSecFans, "right");
+        } 
+        else if (element.classList.contains("usage-overall-content-block")) {
+            mainSections.forEach( (section) => hideSection(section) );
+            revealSection(singleSecCpuUsage, "right");
+        } 
+        else if (element.classList.contains("usage-cores-content-block")) {
+            mainSections.forEach( (section) => hideSection(section) );
+            revealSection(singleSecCoreUsage, "right");
+        } 
+        else if (element.classList.contains("temperature-content-block")) {
+            mainSections.forEach( (section) => hideSection(section) );
+            revealSection(singleSecTemp, "right");
         }
+    })
+})
 
-        // switch (element.classList.contains) {
-        //     case ("frequency-content-block"):
-        //         console.log("FREQUENCY BLOCK");
-        //         break;
-        //     case 1:
-        //         day = "Monday";
-        //         break;
-        //     case 2:
-        //         day = "Tuesday";
-        //         break;
-        //     case 3:
-        //         day = "Wednesday";
-        //         break;
-        //     case 6:
-        //         day = "Saturday";
-        // }
+
+// Expand section buttons
+expandBtns.forEach ( (btn) => {
+    btn.addEventListener("click", () => {
+        mainSections.forEach( (section) => hideSection(section) );
+        hideSection(singleSecFrequency);
+        revealSection(expandedSecFreq, "right");
     })
 })
 
 
 
-// $(document).ready(function() {
-//     $("#expand-freq").click(function() {
-//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $("#section-expanded-frequency").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
-//     $("#backToMain1").click(function() {
-//         $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
-//     $(".frequency-content-block").click(function() {
-//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $("#section-expanded-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $("#section-single-frequency").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
-//     $("#backToMain2").click(function() {
-//         $("#section-single-frequency").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
 
-//     $(".fan-content-block").click(function() {
-//         $(".hide").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $(".show3x1fan").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
-//     $("#backToMain3").click(function() {
-//         $(".show3x1fan").hide(150).animate({ "left": "+=0px" }, "150" );
-//         $(".hide").show(150).animate({ "left": "+=0px" }, "150" );
-//     });
-// });
+// BACK BUTTONS
+const btnBack = document.querySelectorAll(".btn-back");
+
+btnBack.forEach( (btn) => {
+
+    btn.addEventListener("click", () => {
+        singleSections.forEach( (section) => hideSection(section));
+        expandedSections.forEach( (section) => hideSection(section));
+        mainSections.forEach( (section) => revealSection(section, "left") );
+    })
+})
 
 
 
 
-// CPU Frequency select boxes
-var selectBoxes = document.querySelectorAll('.core-select > input');
-const [, ...selectBoxesNoAll] = selectBoxes;
-//var selectBoxWrapper = document.querySelectorAll('.frequency-single-cores')[0];
-var freqCoreCharts = document.querySelectorAll('.freq-single-core-chart');
+// Define CPU Frequency select boxes
+const selectBoxes = document.querySelectorAll('.core-select > input');
+//const [, ...selectBoxesNoAll] = selectBoxes;
+const freqCoreCharts = document.querySelectorAll('.freq-single-core-chart');
 
-//console.log(selectBoxesNoAll);
 
+// Activate/deactivate frequency histogram chart
 function activateFreqChart(target) {
     target.classList.add('active');
 }
@@ -183,10 +194,11 @@ function deActivateFreqChart(target) {
     target.classList.remove('active');
 }
 
+// Change events for all select boxes
 for (var i = 0; i < selectBoxes.length; i++) {
     selectBoxes[i].addEventListener('change', function(event) {
             
-        // ALL CORES
+        // ALL CORES box
         if (event.target == selectBoxes[0]) {
             if (selectBoxes[0].classList.contains('active')) {
                 selectBoxes[0].classList.remove('active');
@@ -209,12 +221,12 @@ for (var i = 0; i < selectBoxes.length; i++) {
         
         
         // If not all cores are selected, remove check from "ALL"
-        if (event.target !== selectBoxes[0]) {
-            //console.log('Anything but the first');
-        }
+        /*if (event.target !== selectBoxes[0]) {
+            console.log('Anything but the first');
+        }*/
         
         
-        // SINGLE CORES
+        // Single cores
         if (event.target == selectBoxes[1]) {
             freqCoreCharts[0].classList.contains('active') 
             ? deActivateFreqChart(freqCoreCharts[0])
@@ -244,7 +256,6 @@ for (var i = 0; i < selectBoxes.length; i++) {
             freqCoreCharts[5].classList.contains('active') 
             ? deActivateFreqChart(freqCoreCharts[5])
             : activateFreqChart(freqCoreCharts[5]);
-            
         }
         
     })

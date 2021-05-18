@@ -1,39 +1,38 @@
-$color-main: #121212;   // App-main-color
-$color-2nd: #212121;    // Content-sections
-$color-3rd: #2d2d2d;    // Box-headings, chart-borders ect.
+
+// Color variables
+$color-black1: #121212; // App-main-color
+$color-black2: #212121; // Content-sections
+$color-black3: #28282e; // Background color
+$color-black4: #2d2d2d; // Box-headings, chart-borders ect.
 $color-blu: #2c97de;    // Section-headers, chart-lines etc.
 $color-trq: #2dbda8;    // Back-buttons, close-buttons
-$color-txt: #DDD;       // Main text-color
-$color-txt2: #666;
-$color-txt-d: #434343;
+$color-white1: #DDD;    // Main text color
+$color-gray1: #666;     // Secondary text color
+$color-gray2: #434343;  // Darker text color
 
+// Font families
 $font-main: 'Roboto', "Helvetica Neue", Helvetica, sans-serif;
 $font-value: 'Electrolize', "Helvetica Neue", Helvetica, sans-serif;
 
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
-/*.box { @include border-radius(10px); }*/
+// Assets
+$img-chart1: "img/chart1.svg";
+$img-chart2: "img/chart2.svg";
+$img-icon-fan: "img/icon-fan.png";
+$img-chart-long1: "img/chart-long1.svg";
+$img-chart-usage1: "img/chart-usage1.svg";
+$img-chart-usage2: "img/chart-usage2.svg";
+$img-chart-usage3: "img/chart-usage3.svg";
+$img-icon-feed: "img/icon-feed.svg";
 
-
-@mixin box-shadow($top, $left, $blur, $size, $color, $inset: false) {
-    @if $inset {
-        -webkit-box-shadow:inset $top $left $blur $size $color;
-        -moz-box-shadow:inset $top $left $blur $size $color;
-        box-shadow:inset $top $left $blur $size $color;
-    } @else {
-        -webkit-box-shadow: $top $left $blur $size $color;
-        -moz-box-shadow: $top $left $blur $size $color;
-        box-shadow: $top $left $blur $size $color;
-    }
-}
-/*@include box-shadow(0,10px,10px,10px, #FF0000, false);*/
-
-
-
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart1.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart2.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/icon-fan.png"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart-long1.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart-usage1.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart-usage2.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/chart-usage3.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/icon-feed.svg"
+// "https://raw.githubusercontent.com/Allu91/cpumeter/master/img/logo.png"
 
 
 html {
@@ -41,15 +40,20 @@ html {
     padding: 0;
     height: 100%;
     font-size: 16px;
-    background: #28282e;
+    background: $color-black3;
     font-family: $font-main;
 }
 body {
+    line-height: 1.5;
     min-height: 100vh;
-    background: #28282e;
+    background: $color-black3;
 }
 * {
     box-sizing: border-box;
+    font-family: $font-main;
+}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
 }
 a {
     text-decoration: none;
@@ -58,7 +62,7 @@ a {
     margin: 0;
     font-size: 0.9rem;
     text-align: center;
-    color: $color-txt2;
+    color: $color-gray1;
     padding-top: 10px;
 }
 #app {
@@ -67,21 +71,42 @@ a {
     height: 100%;
     margin: 15px auto 30px auto;
     padding: 5px 15px 15px 15px;
-    background-color: $color-main;
-    @include border-radius(7px);
-    @include box-shadow(0, 0px, 6px, 4px, #222, false);
+    background-color: $color-black1;
+    border-radius: 7px;
+    box-shadow: 0px 0px 6px 4px #222;
+}
+
+
+#section-root-container {
+    overflow: hidden;
+    position: relative;
+
+    // .section-container {
+    //     width: 100%;
+    //     height: 100%;
+    //     display: inline-block;
+    //     position: relative;
+
+    //     &#section-container-main {
+
+    //     }
+    // }
 }
 
 
 
-/*----- THE 4 MAIN SECTIONS -----*/
-.section-main {
+/*----- THE 3 MAIN SECTION VIEWS -----*/
+.section-main,
+.section-expanded,
+.section-single {
     width: 100%;
-    display: block;
+    display: inline-block;
     // overflow: auto;
     position: relative;
-    background-color: $color-2nd;
-    @include border-radius(5px);
+    visibility: visible;
+    background-color: $color-black2;
+    transition: opacity 0.3s, transform 0.3s;
+    border-radius: 5px;
     
     .section-main-header {
         text-align: left;
@@ -94,7 +119,7 @@ a {
             color: $color-blu;
             text-transform: uppercase;
             font-family: $font-value;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: 1px;
             display: inline-block;
             margin: 0;
@@ -103,75 +128,78 @@ a {
         /* ICONS */
         //i {
             //margin-right: 0px;
-            //color: $color-txt2;
+            //color: $color-gray1;
         //}
         
         .options-wrapper {
             float: right;
             position: relative;
             //display: inline-block;
-
-            &:hover .options-btn {
-                background-color: $color-txt-d;
-                color: $color-txt;
-            }
-            &:hover .options-content {
-                display: block;
-            }
             
             .options-btn {
-                background: $color-2nd;
+                background: $color-black2;
                 height: 22px;
                 width: 22px;
-                color: $color-txt2;
+                color: $color-gray1;
                 text-align: center;
                 padding: 0;
                 font-size: 0.9em;
                 border: 0;
-                //border: solid 1px $color-txt-d;
-                cursor: pointer;
-                @include border-radius(4px);
-                transition: background 0.1s;
+                border-radius: 4px;
+                transition: background-color 0.1s;
             }
             
             .options-content {
-                display: none;
-                position: absolute;
-                right: 0; 
-                background-color: $color-3rd;
-                min-width: 160px;
-                border: solid 2px $color-txt-d;
-                //@include border-radius(8px);
-                @include box-shadow(0,8px,16px,0px, $color-main, false);
-                overflow: auto;
                 z-index: 1;
+                display: none;
+                overflow: auto;
+                position: absolute;
+                right: 0;
+                min-width: 160px;
+                background-color: $color-black4;
+                border: solid 2px $color-gray2;
+                box-shadow: 0px 8px 16px 0px $color-black1;
 
-                a {
-                    font-family: $font-main;
-                    font-size: 0.8em;
-                    color: $color-txt;
-                    padding: 8px 12px;
-                    text-decoration: none;
+                button {
+                    width: 100%;
                     display: block;
+                    outline: none;
+                    border: 0;
+                    padding: 8px 12px;
+                    font-size: 0.8em;
+                    text-align: left;
                     letter-spacing: 1px;
-                    transition: background 0.08s;
+                    color: $color-white1;
+                    font-family: $font-main;
+                    text-decoration: none;
+                    background-color: $color-black4;
+                    transition: background-color 0.08s;
                     
                     i {
-                        margin-right: 5px;
+                        margin-right: 8px;
                     }
 
                     &:hover {
-                        background-color: $color-2nd;
+                        cursor: pointer;
+                        background-color: $color-black2;
                     }
                 }
-
             }
+
+            &:hover .options-btn {
+                cursor: pointer;
+                background-color: $color-gray2;
+                color: $color-white1;
+            }
+            &:hover .options-content {
+                display: block;
+            }
+
         }
 
     }   // section-main-header
     
     
-    &.section-expanded,
     &.section-single {
         .section-main-header {
             padding: 6px 5px 5px 12px;
@@ -183,14 +211,46 @@ a {
 
 
 
+// VIEW HIDE & REVEAL ANIMATIONS
+.view-hidden {
+    display: none !important;
+}
+.view-reveal-anim-from-left,
+.view-reveal-anim-from-right {
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+.view-reveal-anim-from-left {
+    animation-name: reveal_anim_left;
+
+    @keyframes reveal_anim_left {
+          0% {opacity: 0; transform: translateX(-15px);}
+        100% {opacity: 1; transform: translateX(0px);}
+    }
+}
+.view-reveal-anim-from-right {
+    animation-name: reveal_anim_right;
+
+    @keyframes reveal_anim_right {
+          0% {opacity: 0; transform: translateX(15px);}
+        100% {opacity: 1; transform: translateX(0px);}
+    }
+}
+
+
+
+
+
+
 .section-main-content {
     width: 100%;
-    color: $color-txt;
+    color: $color-white1;
     
     .content-block {
         float: left;
         overflow: auto;
-        color: $color-txt;
+        color: $color-white1;
         opacity: 0.8;
         transition: opacity 0.08s, background 0.08s;
   
@@ -201,8 +261,8 @@ a {
             background-color: rgba(200, 200, 255, 0.025);
     
             .freq-blockchart {
-                background-color: $color-3rd;
-                border: solid $color-txt-d 2px;
+                background-color: $color-black4;
+                border: solid $color-gray2 2px;
             }
         }
     }
@@ -212,7 +272,9 @@ a {
 .blocktitle {
     font-weight: 500;
     font-size: 0.8em;
-    color: $color-txt2;
+    line-height: 1.2;
+    margin-bottom: 0.15rem;
+    color: $color-trq;
 }
 .blockvalue {        /* 3800.0 */
     font-size: 1.15em;
@@ -234,27 +296,24 @@ a {
     transition: 0.08s;
     height: 26px;
     min-width: 40px;
-    font-size: 0.875rem;
-    font-weight: 700;
+    font-size: 0.80rem;
+    font-weight: 500;
     text-align: center;
     letter-spacing: 0.05rem;
+    font-family: $font-main;
     margin: 0 10px 0 0;
-    padding: 0 10px 0 10px;
-    background-color: $color-3rd;
-    @include border-radius(15px);
+    padding: 0 9px 1px 11px;
+    background-color: $color-black4;
+    border-radius: 15px;
   
     i {
         color: $color-trq;
         transition: 0.08s;
+        margin-right: 2px;
     }
   
     &:hover {
-        //color: $color-2nd;
-        background-color: $color-txt-d;
-
-        // i {
-        //     color: $color-2nd;
-        // }
+        background-color: $color-gray2;
     }
 }
 
@@ -297,7 +356,7 @@ a {
 
             h1 {
                 font-family: $font-main;
-                color: $color-txt;
+                color: $color-white1;
                 font-size: 2.35em;
                 letter-spacing: 3px;
                 margin: 0;
@@ -313,7 +372,7 @@ a {
                 margin: 0;
                 margin-top: -5px;
                 font-weight: 500;
-                color: $color-txt2;
+                color: $color-gray1;
                 letter-spacing: 0.03rem;
                 font-family: $font-main;
             }
@@ -329,7 +388,7 @@ a {
             font-size: 0.92rem;
             font-weight: 400;
             letter-spacing: 0.02rem;
-            color: $color-txt2;
+            color: $color-gray1;
         }
     }
 
@@ -401,17 +460,17 @@ a {
             opacity: 0.7;
             margin-top: 8px;
             transition: 0.08s;
-            border: solid $color-3rd 2px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            border: solid $color-black4 2px;
+            background-size: auto;
+            background-position: bottom;
+            background-repeat: repeat-x;
           }
 
         .freq-blockchart1 {
-            background-image: url("img/chart1.svg");
+            background-image: url($img-chart1);
           }
         .freq-blockchart2 {
-            background-image: url("img/chart2.svg");
+            background-image: url($img-chart2);
         }
     }
 
@@ -419,7 +478,13 @@ a {
 
     @media (max-width: 1024px) {
         .frequency-content {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .frequency-content {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -439,11 +504,18 @@ a {
     grid-gap: 15px;
     row-gap: 15px;
     grid-template-columns: 37% 1fr;
+    background-color: transparent;
     
     #left-side,
     #right-side {
         margin-top: 0;
         vertical-align: top;
+    }
+
+    @media (max-width: 768px) {
+        grid-gap: 0;
+        row-gap: 15px;
+        grid-template-columns: 100%;
     }
 }
 
@@ -472,8 +544,8 @@ a {
                 width: 35px;
                 height: 35px;
                 margin: 5px auto 5px auto;
-                opacity: 0.7;
-                background-image: url("img/icon-fan.png");
+                opacity: 1.0;
+                background-image: url($img-icon-fan);
                 background-size: 100% 100%;
                 background-repeat: none;
             }
@@ -514,7 +586,7 @@ a {
 
 #section-usage {
     width: 100%;
-    min-height: 225px;
+    min-height: 230px;
     margin: 0 0 0 0;
     display: block;
     //overflow: auto;
@@ -557,7 +629,7 @@ a {
             display: inline-grid;
             vertical-align: top;
             column-gap: 5%;
-            row-gap: 10px;
+            row-gap: 15px;
             grid-template-columns: repeat(3, 1fr);
 
             .usage-cores-content-block {
@@ -568,28 +640,37 @@ a {
                 text-align: center;
 
                 .cores-circle {
-                    width: 60px;
-                    height: 60px;
-                    margin: 3px auto 0 auto;
-                    padding: 3px;
+                    width: 55px;
+                    height: 55px;
+                    margin: 4px auto 0 auto;
+                    padding: 2px;
+                    display: grid;
                     border-radius: 50%;
-                    border: solid 2px $color-txt-d;
+                    border: solid 2px $color-blu;
 
-                    .cores-circle-inner {
-                        display: grid;
-                        color: $color-txt;
-                        font-size: 0.7em;
+                    p {
+                        margin: 0;
+                        place-self: center;
+                        font-size: 0.8em;
+                        color: $color-white1;
                         font-family: $font-value;
-                        width: 100%;
-                        height: 100%;
-                        border-radius: 50%;
-                        border: solid 2px $color-trq;
-
-                        p {
-                            margin: 0;
-                            place-self: center;
-                        }
                     }
+
+                    // .cores-circle-inner {
+                    //     display: grid;
+                    //     color: $color-white1;
+                    //     font-size: 0.75em;
+                    //     width: 100%;
+                    //     height: 100%;
+                    //     border-radius: 50%;
+                    //     border: solid 2px $color-blu;
+
+                    //     p {
+                    //         margin: 0;
+                    //         place-self: center;
+                    //         font-family: $font-value;
+                    //     }
+                    // }
                 }
             }
         }
@@ -683,19 +764,20 @@ a {
             .temperature-image2 {
                 width: 100%;
                 height: 107px;
-                border: solid 2px $color-3rd;
+                border: solid 2px $color-black4;
                 display: block;
                 position: relative;
-                background-image: url("img/chart1.svg");
-                background-size: cover;
-                background-repeat: no-repeat;
+                background-image: url($img-chart1);
+                background-size: auto;
+                background-position: bottom;
+                background-repeat: repeat-x;
                 // vertical-align: bottom;
             }
             .temperature-image1 {
-                background-image: url("img/chart1.svg");
+                background-image: url($img-chart1);
             }
             .temperature-image2 {
-                background-image: url("img/chart2.svg");
+                background-image: url($img-chart2);
             }
         }
     }
@@ -707,20 +789,53 @@ a {
         .temperature-content {
             height: 425px;
             
-            .temperature-content-block {
-                .temperature-image1,
-                .temperature-image2 {
-                    background-position: top;
-                }
-            }
+            // .temperature-content-block {
+            //     .temperature-image1,
+            //     .temperature-image2 {
+            //         background-position: top;
+            //     }
+            // }
         }
     }
 
     @media (max-width: 768px) {
-        height: 340px;
+        height: 300px;
 
         .temperature-content {
-            height: 295px;
+            height: 255px;
+
+            // .temperature-content-block {
+                
+            //     &:last-child {
+            //         padding-bottom: 15px;
+            //     }
+            // }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .temperature-content {
+            grid-template-columns: 1fr;
+
+            .temperature-content-block {
+                .temperature-image1,
+                .temperature-image2 {
+                    height: 85px;
+                    //background-position: 50%;
+                }
+            }
+            // .temperature-content-block {
+            //     .temperature-blocktitle,
+            //     .temperature-value {
+            //         margin-right: 0;
+            //         display: block;
+            //         position: relative;
+            //     }
+            //     .temperature-value {
+            //         text-align: left;
+            //         float: initial;
+            //     }
+            // }
         }
     }
 
@@ -740,7 +855,6 @@ a {
 /*--- EXPANDED SECTIONS ---*/
 
 #section-expanded-frequency {
-    display: none;
     min-height: 500px;
     margin: 5px auto 0px auto;
     
@@ -762,7 +876,7 @@ a {
             
             .blocktitle {
                 font-size: 1em;
-                color: $color-txt;
+                color: $color-trq;
                 float: left;
             }
             .blockvalue {
@@ -782,12 +896,12 @@ a {
 
                 &.freq-blockchart1 {
                     // background-image: url("img/chart1.svg");
-                    background-image: url("img/chart-long1.svg");
+                    background-image: url($img-chart-long1);
                 }
                 &.freq-blockchart2 {
                     // background-image: url("img/chart2.svg");
                     background-position: 150% 50%;
-                    background-image: url("img/chart-long1.svg");
+                    background-image: url($img-chart-long1);
                 }
             }
 
@@ -822,7 +936,6 @@ a {
 // }
 
 #section-single-frequency {
-    display: none;
     min-height: 500px;
     //margin: 5px auto 0px auto;
 
@@ -845,7 +958,7 @@ a {
                 font-weight: 500;
                 letter-spacing: 0.03rem;
                 font-family: $font-main;
-                color: $color-blu;
+                color: $color-white1;
             }
         }
         
@@ -872,9 +985,9 @@ a {
                     .select-title {
                         margin: 0;
                         font-size: 1.05rem;
-                        font-weight: 700;
+                        font-weight: 400;
                         letter-spacing: 0.02rem;
-                        color: $color-txt2;
+                        color: $color-trq;
                         font-family: $font-value;
                     }
                     
@@ -888,13 +1001,13 @@ a {
                     }
                     
                     input:checked {
-                        color: $color-txt;
+                        color: $color-white1;
                     }
                     input:checked ~ .checkmark {
                         background-color: #2196F3;
                     }
                     input:checked ~ .select-title {
-                        color: $color-txt;
+                        color: $color-white1;
                     }
                     
                     .checkmark {
@@ -908,8 +1021,8 @@ a {
                     }
                     
                     &:nth-child(1) {
-                        .checkmark {border-color: $color-txt;}
-                        input:checked ~ .checkmark {background-color: $color-txt;}
+                        .checkmark {border-color: $color-white1;}
+                        input:checked ~ .checkmark {background-color: $color-white1;}
                     }
                     &:nth-child(2) {
                         .checkmark {border-color: $color-blu;}
@@ -938,10 +1051,10 @@ a {
                     
     
                     &:hover input ~ .checkmark {
-                        background-color: $color-txt-d;
+                        background-color: $color-gray1;
                     }
                     &:hover .select-title {
-                        color: $color-txt;
+                        color: $color-white1;
                     }
                     
                 }
@@ -951,14 +1064,48 @@ a {
                 position: relative;
                 text-align: left;
     
-                .freq-blockchart {
-                    width: 100%;
+                .frequency-histogram-label {
+                    p {
+                        margin: 0;
+                        line-height: 1;
+                        font-size: 0.875rem;
+                        color: $color-gray1;
+                        font-family: $font-value;
+
+                        span {
+                            font-family: $font-value;
+                        }
+                    }
+
+                    &#frequency-histogram-label-vertical {
+                        width: 35px;
+                        height: 220px;
+                        margin-right: -4px;
+                        display: inline-grid;
+                        vertical-align: top;
+                    }
+                    &#frequency-histogram-label-horizontal {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        // grid-gap: 1fr;
+                        // grid-template-columns: repeat(4, 1fr);
+    
+                        p {
+                            display: inline-block;
+                        }
+                    }
+                }
+
+                .frequency-histogram-chart {
+                    width: calc(100% - 35px);
                     height: 220px;
                     position: relative;
-                    display: block;
-                    background-color: $color-main;
-                    border-left: 1px $color-txt2 solid;
-                    border-bottom: 1px $color-txt2 solid;
+                    display: inline-block;
+                    margin-right: -4px;
+                    background-color: $color-black1;
+                    border-left: 1px $color-gray1 solid;
+                    border-bottom: 1px $color-gray1 solid;
                     
                     .freq-single-core-chart {
                         opacity: 0;  // DO NOT DISPLAY UNTIL ACTIVE
@@ -970,8 +1117,8 @@ a {
                         background-size: cover;
                         background-position: 0 0;
                         background-repeat: repeat-x;
-                        background-image: url(img/chart-long1.svg);
-                        animation-duration: 24s;
+                        background-image: url($img-chart-long1);
+                        animation-duration: 35s;
                         animation-timing-function: linear;
                         animation-iteration-count: infinite;
                         
@@ -1064,13 +1211,13 @@ a {
                     .full-txtBlock {
                         padding: 10px;
                         border-radius: 7px;
-                        background-color: $color-3rd;
+                        background-color: $color-black4;
                         display: inline-block;
                     }
                     .blocktitle {
                         font-size: 0.95em;
                         text-align: center;
-                        color: $color-txt2;
+                        color: $color-blu;
                     }
                     .blockvalue {
                         font-size: 1.5em;
@@ -1115,17 +1262,67 @@ a {
 
 
 
+#section-single-cpu-usage {
+    .single-cpu-usage-content {
+        display: grid;
+        min-height: 400px;
+        place-items: center;
+
+        h4 {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: $color-gray1;
+            letter-spacing: 0.03rem;
+        }
+    }
+}
+
+
+#section-single-core-usage {
+    .single-core-usage-content {
+        display: grid;
+        min-height: 400px;
+        place-items: center;
+
+        h4 {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: $color-gray1;
+            letter-spacing: 0.03rem;
+        }
+    }
+}
+
+
+#section-single-temperature {
+    .single-temperature-content {
+        display: grid;
+        min-height: 400px;
+        place-items: center;
+
+        h4 {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: $color-gray1;
+            letter-spacing: 0.03rem;
+        }
+    }
+}
+
+
+
+
 .show3x1fan {
     // HIDDEN BY DEFAULT. REVEAL ON FAN-CLICK
-    display: none;
   
-    .section-full-fan {
-        width: 100%;
+    #section-full-fan {
         height: 100%;
         min-height: 500px;
         margin: 0px auto 0px auto;
         font-weight: 500;
-        display: inline-block;
 
         .full-fan-content-wrapper {
             width: 100%;
@@ -1133,13 +1330,13 @@ a {
             display: grid;
             padding: 15px 10px 10px 10px;
             margin: 0 auto 0 auto;
-            column-gap: 3.5%;
+            column-gap: 5.0%;
             row-gap: 20px;
             grid-template-columns: repeat(3, 1fr);
 
             .full-fan-content-cube {
                 height: 100%;
-                // border-left: 2px solid $color-3rd;
+                // border-left: 2px solid $color-black4;
                 
                 &:first-child {
                     border-left: 0;
@@ -1151,13 +1348,11 @@ a {
                     letter-spacing: 1px;
                     font-size: 1.2em;
                     text-align: center;
-                    color: $color-txt;
+                    color: $color-white1;
                 }
                 .full-fan-circle {
                     width: 75%;
-                    // height: 100%;
                     min-height: 100px;
-                    opacity: 0.7;
                     margin: 15px auto 0 auto;
                     padding-top: 40px;
                     background-position: center top;
@@ -1165,13 +1360,13 @@ a {
                     background-size: 100% 100%;
     
                     &.circleimg1 {
-                        background-image: url("img/chart-usage1.svg");
+                        background-image: url($img-chart-usage1);
                     }
                     &.circleimg2 {
-                        background-image: url("img/chart-usage2.svg");
+                        background-image: url($img-chart-usage2);
                     }
                     &.circleimg3 {
-                        background-image: url("img/chart-usage3.svg");
+                        background-image: url($img-chart-usage3);
                     }
     
                     .full-percentagevalue {
@@ -1195,21 +1390,32 @@ a {
                 }
     
                 .full-fan-history {
+                    text-align: right;
+
                     select {
-                        float: right;
                         height: 100%;
-                        display: block;
+                        display: inline-block;
+                        padding-right: 20px;
+                        margin-right: -15px;
                         font-size: 0.85em;
                         font-weight: 500;
-                        color: $color-txt-d;
-                        background-color: $color-2nd;
+                        color: $color-trq;
+                        text-align: right;
+                        text-align-last: right;
+                        background-color: $color-black2;
+                        -webkit-appearance: none;
                         border: none;
                         margin-top: 20px;
         
                         &:hover {
                             cursor: pointer;
-                            color: $color-txt2;
+                            color: $color-white1;
                         }
+                    }
+                    i {
+                        display: inline-block;
+                        pointer-events: none;
+                        user-select: none;
                     }
                     .full-fan-history-chart {
                         width: 100%;
@@ -1217,27 +1423,42 @@ a {
                         overflow: auto;
                         min-height: 110px;
                         background-color: rgba(255, 255, 255, 0.025);
-                        // border: 2px solid $color-3rd;
+                        // border: 2px solid $color-black4;
                         // opacity: 0.99;
                         margin-top: 0px;
                         margin-bottom: 18px;
                         background-position: center top;
                         background-repeat: repeat-x;
                         background-size: 150% 100%;
-                        background-image: url("img/chart-long1.svg");
+                        background-image: url($img-chart-long1);
                     }
                 }
                 
                 .full-fan-history-additional-info {
                     .additional-info-block {
-                        font-size: 1em;
-                        font-weight: 400;
-                        color: $color-txt2;
-        
-                        span {
-                            float: right;
-                            font-size: 1em;
-                            font-weight: 500;
+                        width: 100%;
+                        
+                        tr {
+                            td {
+                                display: inline-block;
+
+                                &.info-title {
+                                    font-size: 0.8rem;
+                                    font-weight: 500;
+                                    color: $color-blu;
+                                    letter-spacing: 0.03rem;
+                                    text-transform: uppercase;
+                                }
+                                &.info-value {
+                                    float: right;
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    letter-spacing: initial;
+                                    color: $color-white1;
+                                    text-transform: initial;
+                                    font-family: $font-value;
+                                }
+                            }
                         }
                     }
                 }
@@ -1248,14 +1469,19 @@ a {
 
 
     @media (max-width: 768px) {
-        .section-full-fan {
+        #section-full-fan {
             .full-fan-content-wrapper {
                 column-gap: 0;
                 grid-template-columns: 100%;
 
                 .full-fan-content-cube {
                     padding-bottom: 20px;
-                    border-bottom: 2px solid $color-3rd;
+                    border-bottom: 2px solid $color-black4;
+
+                    &:last-child {
+                        padding-bottom: 5px;
+                        border-bottom: 0;
+                    }
                 }
             }
         }
@@ -1277,21 +1503,21 @@ a {
 #section-footer {
     display: grid;
     width: 100%;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 80px 1fr;
     padding: 15px 0 0 5px;
     font-family: $font-main;
     
     .footer-left {
-        color: $color-txt2;
+        color: $color-gray1;
         font-size: 1.0rem;
         text-align: left;
         
         .switch {
             position: relative;
             display: inline-block;
-            width: 30px;
-            height: 17px;
-            margin: 0 0 0 5px;
+            width: 46px;
+            height: 23px;
+            margin: 0 0 0 0px;
             top: 3px;
         }
 
@@ -1306,19 +1532,23 @@ a {
             right: 0;
             bottom: 0;
             border-radius: 17px;
-            background-color: $color-txt2;
+            background-color: $color-gray1;
             transition: .1s;
             
             &:before {
                 position: absolute;
                 content: "";
-                height: 13px;
-                width: 13px;
+                height: 19px;
+                width: 19px;
                 left: 2px;
                 bottom: 2px;
                 border-radius: 50%;
-                background-color: $color-main;
-                transition: .1s;
+                background-color: $color-black1;
+                background-size: 67%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url($img-icon-feed);
+                transition: .2s;
             }
         }
         
@@ -1329,7 +1559,7 @@ a {
             box-shadow: 0 0 1px $color-blu;
         }
         input:checked + .feed-slider:before {
-            transform: translateX(13px);
+            transform: translateX(23px) rotate(180deg);
         }
     }
     
@@ -1343,15 +1573,14 @@ a {
             font-size: 1em;
             font-weight: 600;
             text-align: center;
-            color: $color-txt2;
+            color: $color-trq;
             float: right;
             margin: 0 0 0 5px;
             padding: 0 1px 0 1px;
-            background: $color-2nd;
+            background: $color-black2;
             border: 0;
             transition: 0.08s;
-            //border: solid 2px $color-txt-d;
-            @include border-radius(15px);
+            border-radius: 15px;
             
             &#btn-help {
                 padding: 0 15px 0 15px;
@@ -1363,9 +1592,9 @@ a {
                 margin: -2px 0 0 0;
             }
             &:hover {
-                color: $color-txt;
+                color: $color-white1;
                 text-decoration: none;
-                background-color: $color-3rd;
+                background-color: $color-black4;
                 cursor: pointer;
             }
             &:focus {
@@ -1397,10 +1626,10 @@ a {
         width: 85%;
         max-width: 850px;
         position: relative;
-        background-color: $color-2nd;
+        background-color: $color-black2;
         margin: 120px auto 30px auto;
         padding: 0;
-        border: 2px solid $color-txt-d;
+        border: 2px solid $color-gray2;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
         animation-name: animatetop;
         animation-duration: 0.2s;
@@ -1416,7 +1645,7 @@ a {
             font-size: 1.0em;
         }
         hr {
-            border: 1px solid $color-3rd;
+            border: 1px solid $color-black4;
             margin: 5px 0 12px 0;
         }
         
@@ -1424,7 +1653,7 @@ a {
         
         .modal-header {
             padding: 10px 15px 0 15px;
-            background-color: $color-3rd;
+            background-color: $color-black4;
             border: none;
 
             h5 {
@@ -1445,19 +1674,19 @@ a {
         .modal-body {
             float: initial;
             //text-align: justify;
-            color: $color-txt;
+            color: $color-white1;
             // overflow: auto;
             max-height: 450px;
             padding: 25px 50px 15px 50px;
         }
         .modal-footer {
             padding: 2px 16px;
-            background-color: $color-2nd;
+            background-color: $color-black2;
             border: none;
             display: block;
             position: relative;
             text-align: right;
-            border-top: solid 2px $color-3rd;
+            border-top: solid 2px $color-black4;
 
             #close1, #close2 {
                 height: 30px;
@@ -1469,11 +1698,11 @@ a {
                 // float: right;
                 margin: 7px 0 7px 5px;
                 padding: 0 13px 0 13px;
-                background: $color-3rd;
+                background: $color-black4;
                 border: 0;
                 transition: 0.08s;
                 //border: solid 2px $color-trq;
-                @include border-radius(15px);
+                border-radius: 15px;
                 
                 i {
                     margin-right: 6px;
@@ -1481,7 +1710,7 @@ a {
                 
                 &:hover,
                 &:focus {
-                    background-color: $color-txt-d;
+                    background-color: $color-gray2;
                     text-decoration: none;
                     cursor: pointer;
                 }
@@ -1490,7 +1719,7 @@ a {
     }
     
     @keyframes animatetop {
-        from {top: -100px; opacity: 0}
+        from {top: -30px; opacity: 0}
         to {top: 0; opacity: 1}
     }
     
@@ -1511,7 +1740,7 @@ a {
 /*----- Modal tabs -----*/
 .modal-tabs {
     overflow: hidden;
-    background-color: $color-3rd;
+    background-color: $color-black4;
     
     button {
         font-size: 0.9rem;
@@ -1520,10 +1749,10 @@ a {
         font-family: $font-value;
         font-weight: 700;
         text-transform: uppercase;
-        background-color: $color-3rd;
+        background-color: $color-black4;
         float: left;
         border: 0;
-        //border: 2px solid $color-2nd;
+        //border: 2px solid $color-black2;
         border-bottom: none;
         border-radius: 5px 5px 0 0;
         outline: none;
@@ -1534,16 +1763,16 @@ a {
         
         
         &.active {
-            //color: $color-txt2;
-            background-color: $color-2nd;
+            //color: $color-gray1;
+            background-color: $color-black2;
             
             &:hover {
-                background-color: $color-2nd;
+                background-color: $color-black2;
             }
         }
         
         &:hover {
-            background-color: $color-txt-d;
+            background-color: $color-gray2;
         }
     }
 }
@@ -1570,81 +1799,24 @@ a {
 .scrollbar {
 	float: left;
 	overflow-y: scroll;
-    
-    &.scroll-help {
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-color: $color-main;
-        }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: $color-gray2;
     }
     
-    &.scroll-temp {
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-color: $color-txt-d;
-        }
-    }
+    // &.scroll-help {
+    // }
+    // &.scroll-temp {
+    // }
 
-    &.scroll-freq {
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-color: $color-txt-d;
-        }
-    }
-} // Scrollbar
-
-
-
-
-
-
-
-
-
-
-
-#section-copyright {
-    color: $color-txt2;
-    font-family: $font-main;
-    text-align: center;
-    font-size: 0.8rem;
-    letter-spacing: 0.02rem;
-    margin: 0;
-    padding: 10px 0 30px 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    //background-color: $color-2nd;
-
-    a {
-        &:hover {
-            text-decoration: underline;
-        }
-        &:visited {
-            color: $color-blu;
-        }
-    }
 }
 
 
@@ -1657,538 +1829,29 @@ a {
 
 
 
+#section-copyright {
+    color: $color-gray1;
+    font-family: $font-main;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.02rem;
+    margin: 0;
+    padding: 10px 0 30px 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    //background-color: $color-black2;
 
+    a {
+        color: $color-trq;
 
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 768px) {
-    #section-frequency {
-        .frequency-content {
-            grid-template-columns: repeat(2, 1fr);
+        &:hover {
+            text-decoration: underline;
+        }
+        &:visited {
+            color: $color-trq;
         }
     }
-    
-    .section-splitter {
-        display: grid;
-        grid-gap: 0;
-        row-gap: 15px;
-        grid-template-columns: 100%;
+}
 
-        #left-side,
-        #right-side {
-            margin-top: 0;
-            vertical-align: top;
-        }
-    }
-} // @media (max-width: 768px)
-
-
-
-
-
-@media (max-width: 576px) {
-    #section-temperature {
-        .temperature-content {
-            .temperature-content-block {
-                .temperature-blocktitle,
-                .temperature-value{
-                    margin-right: 0;
-                    display: block;
-                    position: relative;
-                }
-                // .temperature-blocktitle {
-                // }
-                .temperature-value {
-                    text-align: left;
-                    float: initial;
-                }
-            }
-        }
-    }
-} // @media (max-width: 576px)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-@media (max-width: 768px) {
-    #main {
-      width: 100%;
-      max-width: 620px;
-      height: 100%;
-      margin: 5px auto 5px auto;
-      padding: 5px 10px 10px 10px;
-      @include border-radius(7px);
-    }
-    .cube {
-      width: 100%;
-      @include border-radius(5px);
-    }
-    .head {
-      letter-spacing: 0px;
-      font-size: 0.9em;
-      height: 25px;
-      padding: 2px 3px 5px 10px;
-    }
-    .cubecontent {
-      width: 100%;
-    }
-    .blocktitle {
-      font-size: 0.7em;
-    }
-    .blockvalue {
-      font-size: 1.05em;
-    }
-    .blockvalue span {
-      font-size: 0.65em;
-    }
-
-
-
-    .freq-cube {
-      min-height: 140px;
-      margin: 5px auto 15px auto;
-
-          .freq-cubecontent {
-            height: 100%;
-            overflow: auto;
-            padding: 10px 0 10px 0;
-          }
-          .freq-content-block {
-            width: 40%;
-            max-width: 170px;
-            height: 100%;
-            margin: 0 1% 5px 6%;
-          }
-          .freq-blockchart1 {
-            width: 100%;
-            height: 57px;
-            opacity: 0.7;
-            margin-top: 0px;
-          }
-          .freq-blockchart2 {
-            width: 100%;
-            height: 57px;
-            opacity: 0.7;
-            margin-top: 0px;
-          }  
-     }
-
-
-    .fan-cube {
-      max-width: none;
-      min-height: 140px;
-      margin: 0 0 15px 0;
-    }
-    .fan-cubecontent {
-      height: 100%;
-      overflow: auto;
-      padding: 10px 10px 10px 10px;
-      text-align: center;
-    }
-    .fan-cubecontent-block {
-      width: 30%;
-      height: 100%;
-      overflow: auto;
-      margin: 0 1% 0 1%;
-      display: block;
-    }
-    .fan-blocktitle {
-      font-size: 0.75em;
-    }
-    .fan-blockvalue {
-      font-size: 1.05em;
-    }
-    .fan-blockchart {
-      width: 100%;
-      margin-top: 8px;
-    }
-    .fan-blockchart img {
-      width: 35%;
-      margin-bottom: 5px;
-      opacity: 0.7;
-    }
-
-
-
-    .use-cube {
-      max-width: none;
-      height: 100%;
-      min-height: 155px;
-      margin: 0 0 0 0;
-    }
-    .use-cubecontent {
-      height: 100%;
-      padding: 15px 15px 15px 10px;
-    }
-
-
-    .use-overall {
-      width: 30%;
-      height: 100%;
-      padding: 5px 10px 0 5px;
-      margin: 0 0 0 0;
-    }
-    .use-overall-cubecontent-block {
-      width: 100%;
-      height: 70px;
-      margin: 3px 0 8px 0;
-      padding-top: 3px;
-    }
-    .use-overall .blocktitle span {
-      font-size: 1em;
-      line-height: 20px;
-    }
-
-
-    .use-cores {
-      width: 70%;
-      height: 100%;
-      margin: 0 0 0 0;
-      padding: 5px 0 0 0;
-      font-size: 0.9em;
-    }
-    .cores-cubecontent-block {
-      width: 32%;
-      height: 75px;
-      margin: 2px 1px 5px 1px;
-      padding-top: 0px;
-    }
-    .cores-circle {
-      width: 45px;
-      height: 45px;
-      margin: 3px auto 0 auto;
-      padding: 2px;
-      border-radius: 50%;
-    }
-    .cores-circle-inner {
-      font-size: 0.65em;
-      padding-top: 10px;
-    }
-
-
-    .temp-cube {
-      height: 60vw;
-      min-height: 230px;
-      margin: 0 0 0 0;
-    }
-    .temp-cubecontent {
-      height: 50vw;
-      min-height: 220px;
-      padding: 10px 10px 10px 10px;
-    }
-    .temp-cubecontent-block {
-      width: 43%;
-      height: 23vw;
-      min-height: 60px;
-      margin: 5px 2% 1vw 4%;
-    }
-    .temp-blocktitle {
-      font-size: 3.2vw;
-    }
-    .temp-value {
-      font-size: 4vw;
-    }
-    .temp-image1 {
-      width: 100%;
-      height: 15vw;
-      max-height: 85px;
-      background-size: 100% 100%;
-    }
-    .temp-image2 {
-      width: 100%;
-      height: 15vw;
-      max-height: 85px;
-      background-size: 100% 100%;
-    }   
-
-
-
-    .settings-cube {
-      width: 100%;
-      padding: 15px 0 0 0;
-    }
-    .set-left {
-      width: 50%;
-      font-size: 0.9em;
-    }
-    .set-right {
-      width: 50%;
-    }
-    .set-button {
-      height: 25px;
-      min-width: 35px;
-      font-size: 0.8em;
-      margin: 0 0 0 3px;
-      padding: 0 10px 0 10px;
-      border: solid 2px $color-txt-d;
-      @include border-radius(15px);
-    }
-    .set-right img {
-      height: 60%;
-      padding: 0;
-      margin: -2px 0 0 0;
-    }
-
-
-
-
-    .modal {
-
-    }
-    #close1, #close2 {
-      height: 25px;
-      font-size: 0.9em;
-      margin: 5px 0 7px 5px;
-      padding: 0 10px 0 10px;
-    }
-    .modal-header {
-      padding: 5px 15px 0px 15px;
-      font-size: 0.9em;
-    }
-
-    .modal-body {
-      text-align: left;
-      height: 70vh;
-      max-height: 450px;
-      padding: 20px 20px 10px 25px;
-    }
-
-    .modal-footer {
-      padding: 2px 16px;
-    }
-
-    .modal-content {
-      margin: 20px auto 30px auto;
-      padding: 0;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    }
-    .modal-content h5 {
-      font-size: 1.2em;
-    }
-    .modal-content p {
-      font-size: 0.8em;
-    } 
-    .modal-content li {
-      font-size: 0.8em;
-    }
-
-
-
-
-
-    div.tab button {
-        font-size: 0.9em;
-        letter-spacing: 0px;
-        padding: 3px 12px;
-        margin: 0 2px 0 0;
-    }
-    .tabcontent {
-        display: none;
-        min-height: 200px;
-    }
-    #modal-info table {
-      width: 100%;
-      font-size: 0.8em;
-    }
-    #modal-info td {
-      height: 40px;
-      padding: 0 10px 5px 0;
-      vertical-align: top;
-      text-align: left;
-      border-bottom: 1px solid $color-3rd;
-    } 
-
-
-
-
-
-    .show3x2 {
-      display: none;
-    }
-    #backToMain1 {
-      margin: 0 5px 10px 10px;
-    }
-    .big-freq-cube {
-      height: 100%;
-      margin: 5px auto 0px auto;
-
-          .blocktitle {
-            font-size: 2.4vw;
-          }
-          .blockvalue {
-            font-size: 3.2vw;
-          }
-          .freq-cubecontent {
-            padding: 10px 0 10px 0;
-          }
-          .freq-content-block {
-            width: 45%;
-            height: 25vw;
-            margin: 1vw 0 1vw 3%;
-          }
-          .freq-blockchart1 {
-            width: 100%;
-            height: 17vw;
-            margin-top: 2px;
-          }
-          .freq-blockchart2 {
-            width: 100%;
-            height: 17vw;
-            margin-top: 2px;
-          }
-    }  
-
-
-    .show1x1 {
-      display: none;
-    }
-    #backToMain2 {
-      margin: 5px 5px 10px 10px;
-    }
-    .full-freq-cube {
-      height: 100%;
-      margin: 5px auto 0px auto;
-
-          .freq-cubecontent {
-            width: 100%;
-            padding: 5px 5px 10px 10px;
-            margin: 0 auto 0 auto;
-            overflow: auto;
-          }
-          .freq-blockchart {
-            width: 100%;
-            margin: 10px auto 10px auto;
-            display: block;
-            font-size: 0.75em;
-          }
-          .freq-blockchart img {
-            width: 100%;
-            max-width: 350px;
-            height: 100%;
-            opacity: 0.7;
-            margin-top: 5px;
-          }
-          .full-txtBlock {
-            width: 80%;
-            padding: 5px;
-            margin: 3px auto 0 auto;
-            border-radius: 7px;
-            display: block;
-            text-align: center;
-          }
-          .blocktitle {
-            font-size: 0.8em;
-            line-height: 18px;
-          }
-          .blockvalue {
-            font-size: 1.1em;
-            line-height: 18px;
-          }
-    }
-
-
-    .show3x1fan {
-
-        .head {
-          font-size: 1.1em;
-          height: 35px;
-          padding: 5px 3px 5px 10px;
-          letter-spacing: 0px;
-        }
-        #backToMain3 {
-          margin: 0 10px 0 0;
-          font-size: 0.7em;
-        }
-        .vertical-line {
-          border-right: none;
-          border-bottom: 1px solid $color-3rd;
-        }
-        .full-fan-cubecontent {
-          padding: 10px 0 10px 0;
-        }
-        .full-fan-cubecontent-block {
-          width: 95%;
-          max-width: 400px;
-          padding: 0 0 15px 0;
-          margin: 0 auto 15px auto;
-          float: none;
-        }
-        .full-fan-circle {
-          width: 90%;
-          min-height: 100px;
-          opacity: 0.7;
-          margin: 10px auto 10px auto;
-          padding-top: 35px;
-        }
-        .full-blocktitle {
-          font-size: 1.1em;
-        }
-        .full-percentagevalue {
-          font-size: 1.0em;
-          margin-bottom: 0px;
-        }
-        .full-rpmvalue {
-          font-size: 1.3em;
-        }
-        .full-rpmvalue span {
-          font-size: 0.6em;
-        }
-        .full-fan-history {
-          width: 47%;
-          margin-right: 2%;
-          display: inline-block;
-        }
-        select {
-          font-size: 0.7em;
-          margin-top: 0;
-        }
-        .full-fan-chart {
-          height: 18vw;
-          min-height: 10px;
-          border: 2px solid $color-3rd;
-          margin-top: 0px;
-          margin-bottom: 0px;
-        }
-        .addinfo-cube {
-          width: 49%;
-          margin-top: 13px;
-          display: inline-block;
-          vertical-align: top;
-        }
-        .full-fan-addinfo {
-          font-size: 0.75em;
-        }
-        .full-fan-addinfo span {
-          font-size: 1em;
-        }
-    }
-
-
-} // Max-width 580px
-*/
 
